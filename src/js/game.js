@@ -16,7 +16,7 @@ var Game = function(canvas) {
 	this.frame_count = 0;
 };
 Game.prototype.IMAGES = {
-	enemy:     'img/enemy.png',
+	boss:      'img/enemy.png',
 	bullet:    'img/bullet.png',
 };
 Game.prototype.init = function() {
