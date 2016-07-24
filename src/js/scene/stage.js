@@ -10,8 +10,8 @@ var Scene = function(game) {
 };
 
 Scene.prototype.run = function() {
-	this.bulletmanager.run();
 	this.boss.run();
+	this.bulletmanager.run();
 };
 Scene.prototype.updateDisplay = function() {
 	this._showBackground();

@@ -24,17 +24,15 @@ BossObject.prototype.shot = function() {
 	var x  = this.game.width / 2;
 	var y = this.game.height / 2;
 	var theta = this.shot_theta;
-	var r = 1;
+	var r = 2;
 
 	this.scene.bulletmanager.create(x, y, r, theta);
 };
 
 BossObject.prototype.run = function() {
 	if(this.frame_count % this.per_shot === 0) {
-		if(this.frame_count < 360) {
-			this.shot();
-			this.shot_theta += 10;
-		}
+		this.shot();
+		this.shot_theta += 10;
 	}
 
 	this.frame_count++;
