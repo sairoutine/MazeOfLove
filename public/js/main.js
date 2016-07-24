@@ -80,12 +80,17 @@ var BulletObject = require('../object/bullet');
 
 var Manager = function(scene, game) {
 	this.game = game;
+	this.scene = scene;
 	this.objects = [];
 };
 Manager.prototype.run = function() {
+console.log(this.objects.length);
+
 	for(var i = 0, len = this.objects.length; i < len; i++) {
 		this.objects[i].run();
 	}
+
+	this.removeOutOfStageObjects();
 };
 Manager.prototype.updateDisplay = function() {
 	for(var i = 0, len = this.objects.length; i < len; i++) {
@@ -95,6 +100,19 @@ Manager.prototype.updateDisplay = function() {
 Manager.prototype.create = function(x, y, r, theta, sprite_x, sprite_y) {
 	this.objects.push(new BulletObject(this.game, x, y, r, theta, sprite_x, sprite_y));
 };
+Manager.prototype.remove = function(i) {
+	this.objects.splice(i, 1);
+
+};
+Manager.prototype.removeOutOfStageObjects = function() {
+	for(var i = 0; i < this.objects.length; i++) {
+		if(this.scene.isOutOfStage(this.objects[i])) {
+			this.remove(i);
+		}
+	}
+};
+
+
 module.exports = Manager;
 
 },{"../object/bullet":5}],4:[function(require,module,exports){
@@ -284,6 +302,7 @@ var Scene = function(game) {
 	this.boss = new Boss(this, game);
 	this.bulletmanager = new BulletManager(this, game);
 };
+Scene.prototype.EXTRA_OUT_OF_STAGE_SIZE = 100;
 
 Scene.prototype.run = function() {
 	this.boss.run();
@@ -295,12 +314,26 @@ Scene.prototype.updateDisplay = function() {
 	this.boss.updateDisplay();
 	this.bulletmanager.updateDisplay();
 };
-
 Scene.prototype._showBackground = function() {
 	this.game.surface.save();
 	this.game.surface.fillStyle = "rgb(0, 0, 0)";
 	this.game.surface.fillRect(0, 0, this.game.width, this.game.height);
 	this.game.surface.restore();
+};
+
+Scene.prototype.isOutOfStage = function(object) {
+	var x = object.x;
+	var y = object.y;
+
+	if(x + this.EXTRA_OUT_OF_STAGE_SIZE < 0 ||
+	   y + this.EXTRA_OUT_OF_STAGE_SIZE < 0 ||
+	   x > this.game.width  + this.EXTRA_OUT_OF_STAGE_SIZE ||
+	   y > this.game.height + this.EXTRA_OUT_OF_STAGE_SIZE
+	  ) {
+		return true;
+	}
+
+	return false;
 };
 
 module.exports = Scene;
