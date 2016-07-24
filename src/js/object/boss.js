@@ -5,6 +5,9 @@ var BossObject = function(scene, game) {
 	this.game  = game;
 
 	this.frame_count = 0;
+	this.shot_theta = 90;
+
+	this.per_shot = 2;
 };
 
 BossObject.prototype.image = function() {
@@ -18,12 +21,23 @@ BossObject.prototype.image_height = function() {
 };
 
 BossObject.prototype.shot = function() {
-	this.scene.bulletmanager.create();
+	var x  = this.game.width / 2;
+	var y = this.game.height / 2;
+	var theta = this.shot_theta;
+	var r = 1;
+
+	this.scene.bulletmanager.create(x, y, r, theta);
 };
 
 BossObject.prototype.run = function() {
-	// TODO: 弾を打つ間隔で if
-	this.shot();
+	if(this.frame_count % this.per_shot === 0) {
+		if(this.frame_count < 360) {
+			this.shot();
+			this.shot_theta += 10;
+		}
+	}
+
+	this.frame_count++;
 };
 
 BossObject.prototype.updateDisplay = function() {

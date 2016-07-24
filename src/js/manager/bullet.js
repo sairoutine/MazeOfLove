@@ -15,7 +15,7 @@ Manager.prototype.updateDisplay = function() {
 		this.objects[i].updateDisplay();
 	}
 };
-Manager.prototype.create = function() {
-	this.objects.push(new BulletObject(this.game));
+Manager.prototype.create = function(x, y, r, theta) {
+	this.objects.push(new BulletObject(this.game, x, y, r, theta));
 };
 module.exports = Manager;
