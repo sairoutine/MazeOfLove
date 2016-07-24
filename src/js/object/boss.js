@@ -7,7 +7,7 @@ var BossObject = function(scene, game) {
 	this.frame_count = 0;
 	this.shot_theta = 90;
 
-	this.add_shot_theta = 25;
+	this.add_shot_theta = 15;
 };
 
 BossObject.prototype.image = function() {
@@ -24,7 +24,7 @@ BossObject.prototype.uzumaki_shot = function() {
 	var x  = this.game.width / 2;
 	var y = this.game.height / 2;
 	var theta = this.shot_theta;
-	var r = 1.5;
+	var r = 1;
 
 	this.scene.bulletmanager.create(x, y, r, theta);
 };
@@ -34,9 +34,9 @@ BossObject.prototype.run = function() {
 	if(this.frame_count % 25 === 0) {
 		this.shot_theta += this.add_shot_theta;
 	}
-	for (var i=0; i<3; i++) {
+	for (var i=0; i<2; i++) {
 		this.uzumaki_shot();
-		this.shot_theta += 5;
+		this.shot_theta += 3;
 	}
 
 
