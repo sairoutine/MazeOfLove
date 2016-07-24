@@ -13,13 +13,16 @@ BulletObject.prototype.run = function() {
 };
 BulletObject.prototype.updateDisplay = function() {
 	this.game.surface.save();
+	this.game.surface.translate(this.x, this.y);
+	this.game.surface.rotate(this._theta_to_radian(this.theta + 90));
+
 	this.game.surface.drawImage(this.image(),
 		// スプライトの取得位置
 		this.spriteWidth()  * this.spriteX(), this.spriteHeight() * this.spriteY(),
 		// スプライトのサイズ
 		this.spriteWidth(), this.spriteHeight(),
-		// オブジェクトのゲーム上の位置
-		this.rx(), this.ry(),
+		// オブジェクトのゲーム上の位置(translateした原点から)
+		-this.spriteWidth()/2, -this.spriteHeight()/2,
 		// オブジェクトのゲーム上のサイズ
 		this.spriteWidth(), this.spriteHeight()
 	);
@@ -50,7 +53,7 @@ BulletObject.prototype.spriteX = function () {
 	return 9;
 };
 BulletObject.prototype.spriteY = function () {
-	return 3;
+	return 4;
 };
 // θ -> ラジアンに変換
 BulletObject.prototype._theta_to_radian = function(theta){
