@@ -20,25 +20,24 @@ BossObject.prototype.image_height = function() {
 	return this.image().height * 0.1;
 };
 
-BossObject.prototype.shot = function() {
+BossObject.prototype.uzumaki_shot = function() {
 	var x  = this.game.width / 2;
 	var y = this.game.height / 2;
 	var theta = this.shot_theta;
-	var r = 0.5;
+	var r = 1.5;
 
 	this.scene.bulletmanager.create(x, y, r, theta);
 };
 
 BossObject.prototype.run = function() {
-	if(this.frame_count % 45 === 0) {
+	// 渦巻き弾
+	if(this.frame_count % 25 === 0) {
 		this.shot_theta += this.add_shot_theta;
 	}
-
-
-	// 渦巻き弾
-	this.shot();
-
-	this.shot_theta += 5;
+	for (var i=0; i<3; i++) {
+		this.uzumaki_shot();
+		this.shot_theta += 5;
+	}
 
 
 	this.frame_count++;

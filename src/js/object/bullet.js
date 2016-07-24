@@ -1,11 +1,14 @@
 'use strict';
 
-var BulletObject = function(game, x, y, r, theta) {
+var BulletObject = function(game, x, y, r, theta, sprite_x, sprite_y) {
 	this.game = game;
 	this.x = x;
 	this.y = y;
 	this.r = r;
 	this.theta = theta;
+
+	this.sprite_x = sprite_x || 9;
+	this.sprite_y = sprite_y || 4;
 };
 BulletObject.prototype.run = function() {
 	this.x += this.calc_moveX();
@@ -56,10 +59,10 @@ BulletObject.prototype.spriteHeight = function () {
 	return 16;
 };
 BulletObject.prototype.spriteX = function () {
-	return 9;
+	return this.sprite_x;
 };
 BulletObject.prototype.spriteY = function () {
-	return 4;
+	return this.sprite_y;
 };
 // θ -> ラジアンに変換
 BulletObject.prototype._theta_to_radian = function(theta){
