@@ -7,6 +7,7 @@ var BossObject = function(scene, game) {
 	this.frame_count = 0;
 	this.shot_theta = 90;
 
+	this.add_shot_theta = 25;
 };
 
 BossObject.prototype.image = function() {
@@ -23,15 +24,21 @@ BossObject.prototype.shot = function() {
 	var x  = this.game.width / 2;
 	var y = this.game.height / 2;
 	var theta = this.shot_theta;
-	var r = 1;
+	var r = 0.5;
 
 	this.scene.bulletmanager.create(x, y, r, theta);
 };
 
 BossObject.prototype.run = function() {
-		this.shot();
-		this.shot_theta += 5;
+	if(this.frame_count % 45 === 0) {
+		this.shot_theta += this.add_shot_theta;
+	}
 
+
+	// 渦巻き弾
+	this.shot();
+
+	this.shot_theta += 5;
 
 
 	this.frame_count++;

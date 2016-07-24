@@ -24,7 +24,7 @@ BulletObject.prototype.updateDisplay = function() {
 		// オブジェクトのゲーム上の位置(translateした原点から)
 		-this.spriteWidth()/2, -this.spriteHeight()/2,
 		// オブジェクトのゲーム上のサイズ
-		this.spriteWidth(), this.spriteHeight()
+		this.imageWidth(), this.imageHeight()
 	);
 
 	this.game.surface.restore();
@@ -41,6 +41,12 @@ BulletObject.prototype.rx = function () {
 BulletObject.prototype.ry = function () {
 	return(this.y - this.spriteHeight());
 
+};
+BulletObject.prototype.imageWidth = function () {
+	return 12;
+};
+BulletObject.prototype.imageHeight = function () {
+	return 12;
 };
 
 BulletObject.prototype.spriteWidth = function () {
