@@ -7,8 +7,6 @@ var Manager = function(scene, game) {
 	this.objects = [];
 };
 Manager.prototype.run = function() {
-console.log(this.objects.length);
-
 	for(var i = 0, len = this.objects.length; i < len; i++) {
 		this.objects[i].run();
 	}
