@@ -5,8 +5,8 @@ var BulletManager = require('../manager/bullet');
 var Scene = function(game) {
 	this.game = game;
 
-	this.boss = new Boss(this);
-	this.bulletmanager = new BulletManager(this);
+	this.boss = new Boss(this, game);
+	this.bulletmanager = new BulletManager(this, game);
 };
 
 Scene.prototype.run = function() {
