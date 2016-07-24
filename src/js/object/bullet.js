@@ -7,8 +7,8 @@ var BulletObject = function(game, x, y, r, theta, sprite_x, sprite_y) {
 	this.r = r;
 	this.theta = theta;
 
-	this.sprite_x = sprite_x || 9;
-	this.sprite_y = sprite_y || 4;
+	this.sprite_x = sprite_x || 0;
+	this.sprite_y = sprite_y || 0;
 };
 BulletObject.prototype.run = function() {
 	this.x += this.calc_moveX();
