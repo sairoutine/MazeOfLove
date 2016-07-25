@@ -20,6 +20,6 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "stats.js": "^0.16.0"
+    "stats.js": "git@github.com:sairoutine/stats.js.git#fix_self"
   }
 }
