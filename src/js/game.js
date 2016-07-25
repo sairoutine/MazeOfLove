@@ -1,7 +1,13 @@
 'use strict';
 var StageScene   = require('./scene/stage');
+var Stats = require('stats.js');
 
 var Game = function(canvas) {
+	this.stats = new Stats();
+	this.stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom 
+
+	document.body.appendChild( this.stats.dom );
+
 	this.surface = canvas.getContext('2d');
 	this.width = Number(canvas.getAttribute('width'));
 	this.height = Number(canvas.getAttribute('height'));
@@ -46,6 +52,7 @@ Game.prototype.init = function() {
 Game.prototype.run = function() {
 	// 次の描画タイミングで再呼び出ししてループ
 	requestAnimationFrame(this.run.bind(this));
+	this.stats.begin();
 
 	// 素材が読み込み済になるまで待機
 	if(!this.is_load_done) return;
@@ -56,6 +63,7 @@ Game.prototype.run = function() {
 
 	// 経過フレーム数更新
 	this.frame_count++;
+	this.stats.end();
 };
 
 module.exports = Game;
