@@ -1,3 +1,4 @@
+/* global dat */
 'use strict';
 
 var BossObject = function(scene, game) {
@@ -10,6 +11,13 @@ var BossObject = function(scene, game) {
 	this.add_shot_theta = 15;
 
 	this.maru_shot_theta = 0;
+
+	this.create_gui();
+};
+BossObject.prototype.create_gui = function() {
+	var self = this;
+	var gui = new dat.GUI();
+	//gui.add(self, 'r', 0, 10);
 };
 
 BossObject.prototype.image = function() {
