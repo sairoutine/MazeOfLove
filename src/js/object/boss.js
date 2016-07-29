@@ -8,16 +8,25 @@ var BossObject = function(scene, game) {
 	this.frame_count = 0;
 	this.shot_theta = 90;
 
-	this.add_shot_theta = 15;
 
 	this.maru_shot_theta = 0;
+
+	this.add_shot_theta = 15;
+	this.uzumaki_speed = 1;
+	this.maru_percount = 50;
+	this.uzumaki_percount = 25;
+	this.maru_num = 18;
 
 	this.create_gui();
 };
 BossObject.prototype.create_gui = function() {
 	var self = this;
 	var gui = new dat.GUI();
-	//gui.add(self, 'r', 0, 10);
+	gui.add(self, 'add_shot_theta', 0, 50);
+	gui.add(self, 'uzumaki_speed', 0, 10);
+	gui.add(self, 'uzumaki_percount', 0, 100).step(1);
+	gui.add(self, 'maru_percount', 0, 100).step(1);
+	gui.add(self, 'maru_num', 0, 100).step(1);
 };
 
 BossObject.prototype.image = function() {
@@ -34,7 +43,7 @@ BossObject.prototype.uzumaki_shot = function() {
 	var x  = this.game.width / 2;
 	var y = this.game.height / 2;
 	var theta = this.shot_theta;
-	var r = 1;
+	var r = this.uzumaki_speed;
 
 	this.scene.bulletmanager.create(x, y, r, theta, 9, 4);
 };
@@ -49,7 +58,7 @@ BossObject.prototype.maru_shot = function(speed) {
 
 BossObject.prototype.run = function() {
 	// 渦巻き弾
-	if(this.frame_count % 25 === 0) {
+	if(this.frame_count % this.uzumaki_percount === 0) {
 		this.shot_theta += this.add_shot_theta;
 		this.maru_shot_theta += this.add_shot_theta;
 	}
@@ -59,8 +68,8 @@ BossObject.prototype.run = function() {
 	}
 
 	// 円形弾
-	if(this.frame_count % 50 === 0) {
-		for (i=0; i<18; i++) {
+	if(this.frame_count % this.maru_percount === 0) {
+		for (i=0; i<this.maru_num; i++) {
 			this.maru_shot(2);
 			this.maru_shot(2.5);
 			this.maru_shot(3);
